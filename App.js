@@ -1,21 +1,24 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, FlatList } from 'react-native';
 
 export default function App() {
 
   const [input1, setInput1] = React.useState('');
   const [input2, setInput2] = React.useState('');
   let [result, setResult] = React.useState(0);
+  const [data, setData] = React.useState([]);
 
   const minusButton = () => {
     let minus = ((input1) - (input2));
     setResult(minus);
+    setData([...data, {key: `${input1} - ${input2} = ${minus}`}]);
   };
 
   const plusButton = () => {
     let plus = ((+input1) + (+input2));
     setResult(plus);
+    setData([...data, {key: `${input1} + ${input2} = ${plus}`}]);
   };
 
   return (
@@ -42,6 +45,13 @@ export default function App() {
             <Button color="blue" onPress={minusButton} title="-" />
           </View>
         </View>
+        <Text>History:</Text>
+        <FlatList style={styles.list}
+              data={data}
+              renderItem={({ item }) =>
+                <Text>{item.key}</Text>
+              }
+          />
     </View>
   );
 }
@@ -52,6 +62,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 160,
   },
   buttonContainer: {
     margin: 20,
