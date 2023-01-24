@@ -12,13 +12,13 @@ export default function App() {
   const minusButton = () => {
     let minus = ((input1) - (input2));
     setResult(minus);
-    setData([...data, {key: `${input1} - ${input2} = ${minus}`}]);
+    setData([{key: `${input1} - ${input2} = ${minus}`}, ...data]);
   };
 
   const plusButton = () => {
     let plus = ((+input1) + (+input2));
     setResult(plus);
-    setData([...data, {key: `${input1} + ${input2} = ${plus}`}]);
+    setData([{key: `${input1} + ${input2} = ${plus}`}, ...data]);
   };
 
   return (
@@ -36,7 +36,6 @@ export default function App() {
         value={input2}
         keyboardType="numeric"
       />
-      <StatusBar style="auto" />
         <View style={styles.buttonContainer}>
           <View style={{marginRight: 20}}>
             <Button color="blue" onPress={plusButton} title="+" />
@@ -52,6 +51,7 @@ export default function App() {
                 <Text>{item.key}</Text>
               }
           />
+          <StatusBar style="auto" />
     </View>
   );
 }
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 160,
+    marginTop: 160,
   },
   buttonContainer: {
     margin: 20,
